@@ -1,5 +1,6 @@
 import 'chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = 'register_screen';
@@ -11,6 +12,11 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  var _auth=FirebaseAuth.instance;
+  late String email;
+  late String pass;
+  var controller= TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,14 +35,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
+              controller: controller,
               onChanged: (value) {
                 //Do something with the user input.
+                email=value;
               },
               decoration: const InputDecoration(
                 hintText: 'Enter your email',
                 hintStyle: TextStyle(color: Colors.blue),
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
@@ -57,12 +65,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             TextField(
               onChanged: (value) {
                 //Do something with the user input.
+                pass=value;
               },
               decoration: const InputDecoration(
                 hintText: 'Enter your password',
                 hintStyle: TextStyle(color: Colors.blue),
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
@@ -87,9 +96,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 borderRadius: BorderRadius.all(const Radius.circular(30.0)),
                 elevation: 5.0,
                 child: MaterialButton(
-                  onPressed: () {
+                  onPressed: () async{
                     //Implement registration functionality.
-                    Navigator.pushNamed(context, ChatScreen.id);
+                    try{
+                      await _auth.createUserWithEmailAndPassword(email: email, password: pass);
+                      Navigator.pushNamed(context, ChatScreen.id);
+                    } catch (e){
+                      print(e);
+                    }
+
+
                   },
                   minWidth: 200.0,
                   height: 42.0,

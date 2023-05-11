@@ -1,13 +1,13 @@
 # chat_app_w2
-Week 2 Chat App OOP2 ( 30 April 2023)
+Week 3 Chat App OOP2 ( 11 May 2023)
 
 Our goals for today:
-1- Create and use Firebase project for your app for storing messages and authentication. 
-1- Add authentication feature using Firebase Authentication (email and phone).
-2- To add Firestore to store chat messages.
-3- Using Stream to retrieve messages.
+- Create and use Firebase project for your app for storing messages and authentication. (Done)
+- Add authentication feature using Firebase Authentication (email and phone).(Done)
+3- To add Firestore to store chat messages.
+4- Using Stream to retrieve messages.
 4- Using ListView to show the messages
-5- Apply security rules if needed to secure the database.
+6- Apply security rules if needed to secure the database.
 
 
 # Flash Chat ⚡️
